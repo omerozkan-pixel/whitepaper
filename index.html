@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIGA 2026 — Servas Whitepaper Delegate Reference</title>
+<style>
+:root {
+  --ink: #18181a;
+  --ink2: #44443e;
+  --ink3: #888880;
+  --paper: #f8f6f1;
+  --paper2: #efeae0;
+  --paper3: #e5dece;
+  --rule: #d0c9bc;
+  --gold: #8b6914;
+  --gold-bg: #faf3e0;
+  --gold-border: #d4a843;
+  --green: #1a5c35;
+  --green-bg: #e8f5ec;
+  --green-border: #4a9e68;
+  --red: #7a2020;
+  --red-bg: #fdf0f0;
+  --red-border: #c06060;
+  --blue: #1a3a6e;
+  --blue-bg: #edf2fa;
+  --blue-border: #5880c0;
+  --purple: #4a1e78;
+  --purple-bg: #f3eefa;
+  --purple-border: #9060c8;
+  --teal: #0e5050;
+  --teal-bg: #e6f5f5;
+  --teal-border: #3a9090;
+  --r: 4px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Georgia',serif;background:var(--paper);color:var(--ink);font-size:15px;line-height:1.7}
+
+/* TOPBAR */
+.topbar{background:var(--ink);color:#e8e4dc;padding:0}
+.topbar-inner{max-width:1100px;margin:0 auto;display:flex;align-items:stretch;gap:0}
+.topbar-brand{padding:18px 28px;border-right:1px solid #333}
+.topbar-logo{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#a09880;margin-bottom:4px}
+.topbar-title{font-size:20px;letter-spacing:.02em;line-height:1.2}
+.topbar-title span{color:var(--gold-border)}
+.topbar-meta{padding:18px 24px;font-size:12px;color:#888;display:flex;flex-direction:column;justify-content:center;gap:3px}
+.topbar-meta strong{color:#ccc}
+
+/* NAV */
+.nav{background:#111;border-bottom:2px solid var(--gold)}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;overflow-x:auto}
+.nav-btn{font-family:'Georgia',serif;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#888;background:none;border:none;border-bottom:3px solid transparent;padding:14px 20px 11px;cursor:pointer;white-space:nowrap;transition:color .2s,border-color .2s;flex-shrink:0}
+.nav-btn:hover{color:#ddd}
+.nav-btn.active{color:var(--gold-border);border-bottom-color:var(--gold-border)}
+
+/* PAGES */
+.page{display:none}
+.page.active{display:block}
+.container{max-width:1100px;margin:0 auto;padding:40px 28px 80px}
+
+/* SECTION HEADER */
+.sec-eyebrow{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.sec-title{font-size:24px;font-weight:normal;margin-bottom:10px;line-height:1.25}
+.sec-lead{font-size:14px;color:var(--ink2);font-style:italic;line-height:1.75;padding-bottom:22px;border-bottom:1px solid var(--rule);margin-bottom:32px}
+
+/* CRISIS DASHBOARD */
+.crisis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:28px}
+.crisis-card{background:#fff;border:1px solid var(--rule);border-radius:var(--r);padding:18px 16px;text-align:center}
+.crisis-num{font-size:28px;font-weight:bold;line-height:1;margin-bottom:6px}
+.crisis-label{font-size:11px;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;line-height:1.4}
+.crisis-trend{font-size:12px;margin-top:8px;font-style:italic}
+.c-danger .crisis-num{color:var(--red)}
+.c-warn .crisis-num{color:#b05a00}
+.c-ok .crisis-num{color:var(--green)}
+
+/* PROJECTION TABLE */
+.proj-table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:28px}
+.proj-table th{background:var(--ink);color:#e8e4dc;padding:10px 14px;text-align:left;font-weight:normal;letter-spacing:.04em}
+.proj-table td{padding:9px 14px;border-bottom:1px solid var(--rule)}
+.proj-table tr:nth-child(even) td{background:var(--paper2)}
+.proj-table .trend-down{color:var(--red);font-weight:bold}
+.proj-table .trend-up{color:#b05a00;font-weight:bold}
+
+/* INFOBOX */
+.infobox{border-radius:var(--r);padding:14px 18px;margin-bottom:20px;font-size:13.5px;line-height:1.65}
+.ib-gold{background:var(--gold-bg);border-left:4px solid var(--gold-border);color:var(--ink)}
+.ib-green{background:var(--green-bg);border-left:4px solid var(--green-border)}
+.ib-red{background:var(--red-bg);border-left:4px solid var(--red-border)}
+.ib-blue{background:var(--blue-bg);border-left:4px solid var(--blue-border)}
+
+/* MEMBER TYPES */
+.member-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:32px}
+.member-card{border:1px solid var(--rule);border-radius:var(--r);background:#fff;overflow:hidden}
+.member-card-head{padding:16px;display:flex;align-items:center;gap:12px}
+.member-icon{font-size:28px;width:44px;text-align:center;flex-shrink:0}
+.member-name{font-size:14px;font-weight:bold;line-height:1.2}
+.member-type{font-size:11px;color:var(--ink3);margin-top:2px}
+.member-card-body{padding:0 16px 14px;font-size:13px;color:var(--ink2);line-height:1.6}
+.member-badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;margin-top:6px;letter-spacing:.04em}
+
+/* MOTIONS */
+.motion-group{margin-bottom:36px}
+.motion-group-title{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);padding:10px 0 10px;border-top:2px solid var(--ink);margin-bottom:14px;font-family:Georgia,serif}
+.motion-card{background:#fff;border:1px solid var(--rule);border-radius:var(--r);margin-bottom:10px;overflow:hidden}
+.motion-header{display:flex;align-items:stretch;cursor:pointer;user-select:none}
+.motion-tab{background:var(--ink);color:var(--gold-border);font-size:9px;letter-spacing:.12em;text-transform:uppercase;writing-mode:vertical-rl;transform:rotate(180deg);padding:12px 7px;min-width:30px;display:flex;align-items:center;justify-content:center;white-space:nowrap;flex-shrink:0}
+.motion-summary{flex:1;padding:13px 14px}
+.motion-title{font-size:14px;font-weight:bold;margin-bottom:3px}
+.motion-desc{font-size:12.5px;color:var(--ink2);font-style:italic}
+.motion-chevron{padding:13px 14px;color:var(--ink3);font-size:16px;display:flex;align-items:center;flex-shrink:0;transition:transform .2s}
+.motion-card.open .motion-chevron{transform:rotate(180deg)}
+.motion-body{display:none;padding:4px 14px 16px;border-top:1px solid var(--paper2)}
+.motion-card.open .motion-body{display:block}
+.impact-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0 10px}
+.impact-box{border-radius:var(--r);padding:12px 14px}
+.impact-yes{background:var(--green-bg);border-left:3px solid var(--green-border)}
+.impact-no{background:var(--red-bg);border-left:3px solid var(--red-border)}
+.impact-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:bold;margin-bottom:5px}
+.impact-yes .impact-label{color:var(--green)}
+.impact-no .impact-label{color:var(--red)}
+.impact-text{font-size:13px;line-height:1.55;color:var(--ink)}
+.motion-note{background:var(--gold-bg);border-left:3px solid var(--gold-border);border-radius:var(--r);padding:9px 14px;font-size:12.5px;font-style:italic;color:var(--ink2);margin-top:10px}
+.motion-note strong{color:var(--gold);font-style:normal}
+.xref{display:inline-block;font-size:11px;background:var(--blue-bg);color:var(--blue);padding:2px 9px;border-radius:20px;margin-top:8px;text-decoration:none;cursor:pointer}
+.xref:hover{background:var(--blue-border);color:#fff}
+
+/* KPI TABLE */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:32px}
+.kpi-card{background:#fff;border:1px solid var(--rule);border-radius:var(--r);padding:14px 16px}
+.kpi-num{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px}
+.kpi-indicator{font-size:18px;font-weight:bold;margin-bottom:4px;line-height:1.1}
+.kpi-target{font-size:11px;color:var(--ink3);margin-bottom:6px}
+.kpi-owner{font-size:10px;background:var(--paper2);padding:2px 8px;border-radius:20px;color:var(--ink2)}
+
+/* RISK */
+.risk-table{width:100%;border-collapse:collapse;font-size:13px}
+.risk-table th{background:var(--ink);color:#e8e4dc;padding:10px 14px;text-align:left;font-weight:normal}
+.risk-table td{padding:10px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+.risk-table tr:nth-child(even) td{background:var(--paper2)}
+.risk-area{font-weight:bold;font-size:12px}
+.risk-level{display:inline-block;font-size:10px;padding:1px 7px;border-radius:20px;margin-top:3px;font-weight:bold}
+.rl-high{background:var(--red-bg);color:var(--red)}
+.rl-med{background:#fff8e0;color:#8b5e00}
+.rl-low{background:var(--green-bg);color:var(--green)}
+
+/* Q&A INDEX */
+.qa-topics{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.topic-pill{font-size:12px;padding:6px 14px;border-radius:20px;cursor:pointer;border:1px solid var(--rule);background:#fff;color:var(--ink2);transition:all .15s}
+.topic-pill:hover,.topic-pill.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.qa-block{margin-bottom:32px}
+.qa-block-title{font-size:13px;font-weight:bold;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);padding:10px 0 10px;border-top:2px solid var(--ink);margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.qa-block-icon{font-size:20px}
+.qa-row{display:flex;align-items:flex-start;gap:12px;padding:9px 8px;border-bottom:1px solid var(--paper3);cursor:pointer;border-radius:var(--r);transition:background .1s}
+.qa-row:hover{background:var(--paper2)}
+.qa-qnum{font-size:12px;font-weight:bold;color:var(--gold);min-width:28px;flex-shrink:0;padding-top:2px}
+.qa-qtext{font-size:13.5px;flex:1;line-height:1.45}
+.qa-tags{display:flex;gap:5px;flex-shrink:0;align-items:flex-start;padding-top:3px;flex-wrap:wrap}
+.qa-tag{font-size:10px;padding:2px 7px;border-radius:20px;white-space:nowrap;letter-spacing:.02em}
+.t-struct{background:var(--paper3);color:var(--ink2)}
+.t-demo{background:var(--blue-bg);color:var(--blue)}
+.t-fin{background:var(--green-bg);color:var(--green)}
+.t-peace{background:var(--purple-bg);color:var(--purple)}
+.t-social{background:#fff3e8;color:#7a3a00}
+.t-val{background:var(--gold-bg);color:var(--gold)}
+.t-expert{background:var(--teal-bg);color:var(--teal)}
+.qa-flag{font-size:14px}
+.qa-panel{display:none;background:var(--paper2);border-radius:var(--r);padding:12px 16px;margin:4px 0 8px 40px;font-size:13px;color:var(--ink2);font-style:italic;line-height:1.65;border-left:3px solid var(--rule)}
+.qa-panel.open{display:block}
+
+/* OPINIONS */
+.opinion-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-bottom:32px}
+.opinion-card{background:#fff;border:1px solid var(--rule);border-radius:var(--r);padding:20px}
+.opinion-quote{font-size:13.5px;font-style:italic;color:var(--ink2);line-height:1.7;margin-bottom:14px}
+.opinion-quote::before{content:'\201C';font-size:28px;color:var(--gold-border);line-height:0;vertical-align:-.4em;margin-right:3px}
+.opinion-person{font-size:12px;font-weight:bold;color:var(--ink)}
+.opinion-role{font-size:11px;color:var(--ink3);margin-top:2px}
+
+/* AGORA */
+.timeline-table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:24px}
+.timeline-table th{background:var(--ink);color:#e8e4dc;padding:9px 14px;text-align:left;font-weight:normal;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.timeline-table td{padding:9px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+.timeline-table tr:nth-child(even) td{background:var(--paper2)}
+.timeline-phase{font-weight:bold;font-size:12px}
+
+/* PRINT BUTTON */
+.print-fab{position:fixed;bottom:24px;right:24px;background:var(--ink);color:var(--gold-border);border:1px solid var(--gold-border);border-radius:var(--r);padding:10px 20px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;font-family:Georgia,serif;transition:background .2s;z-index:999}
+.print-fab:hover{background:#333}
+
+/* SCROLL TO TOP */
+.scroll-top{position:fixed;bottom:24px;left:24px;background:var(--ink);color:#888;border:1px solid #333;border-radius:var(--r);padding:10px 14px;font-size:14px;cursor:pointer;z-index:999;transition:color .2s}
+.scroll-top:hover{color:#fff}
+
+@media(max-width:640px){
+  .topbar-inner{flex-direction:column}
+  .topbar-brand{border-right:none;border-bottom:1px solid #333}
+  .impact-grid{grid-template-columns:1fr}
+  .member-grid{grid-template-columns:1fr 1fr}
+  .crisis-grid{grid-template-columns:1fr 1fr}
+}
+@media print{
+  .nav,.print-fab,.scroll-top{display:none}
+  .page{display:block!important}
+  .motion-body,.qa-panel{display:block!important}
+  .motion-card{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-brand">
+      <div class="topbar-logo">Servas International · SIGA 2026</div>
+      <div class="topbar-title">Whitepaper <span>Delegate Reference</span></div>
+    </div>
+    <div class="topbar-meta">
+      <div><strong>Version 3.3</strong> — Final</div>
+      <div>Author: Ömer Özkan · Istanbul, April 2026</div>
+      <div>Full document: <a href="https://drive.google.com/file/d/1cuqsqX8-_ZbpKkHTBGCHZr2MPhXn1gSV/view?usp=sharing" style="color:var(--gold-border)" target="_blank">Google Drive PDF ↗</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="nav">
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="showPage('crisis')">📊 The Case for Change</button>
+    <button class="nav-btn" onclick="showPage('model')">🐎 Hybrid Model</button>
+    <button class="nav-btn" onclick="showPage('motions')">🗳️ Voting Guide</button>
+    <button class="nav-btn" onclick="showPage('kpi')">🎯 KPIs & Risks</button>
+    <button class="nav-btn" onclick="showPage('agora')">🏺 Servas Agora</button>
+    <button class="nav-btn" onclick="showPage('qa')">❓ Q&amp;A Index</button>
+    <button class="nav-btn" onclick="showPage('opinions')">💬 Opinions</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PAGE 1: THE CASE FOR CHANGE -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="page active" id="page-crisis">
+<div class="container">
+  <div class="sec-eyebrow">Executive Summary · Section I</div>
+  <div class="sec-title">Why change is necessary — and why now</div>
+  <div class="sec-lead">Servas is not in crisis. But it is on a trajectory that leads there. The 2026 General Assembly is not the last moment to act — it is the last <em>comfortable</em> one. The numbers below are not projections of catastrophe; they are the existing trend, continued.</div>
+
+  <div class="crisis-grid">
+    <div class="crisis-card c-danger">
+      <div class="crisis-num">60%</div>
+      <div class="crisis-label">of members are over 60 years old</div>
+      <div class="crisis-trend" style="color:var(--red)">18–40 age group: only 15%</div>
+    </div>
+    <div class="crisis-card c-danger">
+      <div class="crisis-num">−18,776</div>
+      <div class="crisis-label">CHF net deficit 2024–25</div>
+      <div class="crisis-trend" style="color:var(--red)">First major deficit since 2019</div>
+    </div>
+    <div class="crisis-card c-warn">
+      <div class="crisis-num">20%</div>
+      <div class="crisis-label">of members leave annually</div>
+      <div class="crisis-trend" style="color:#b05a00">80% of members under 5 years tenure</div>
+    </div>
+    <div class="crisis-card c-warn">
+      <div class="crisis-num">&lt;1%</div>
+      <div class="crisis-label">net host growth since 1992</div>
+      <div class="crisis-trend" style="color:#b05a00">Peak: 13,626 hosts in 1992. Today: 13,125</div>
+    </div>
+    <div class="crisis-card c-ok">
+      <div class="crisis-num">452,867</div>
+      <div class="crisis-label">CHF in reserves (2025)</div>
+      <div class="crisis-trend" style="color:var(--green)">Position of strength — while it lasts</div>
+    </div>
+    <div class="crisis-card c-ok">
+      <div class="crisis-num">70 yrs</div>
+      <div class="crisis-label">of international credibility</div>
+      <div class="crisis-trend" style="color:var(--green)">UN consultative status · 100+ countries</div>
+    </div>
+  </div>
+
+  <div class="infobox ib-gold" style="margin-bottom:24px">
+    <strong>"My temple was the world; my fellow parishioners, the human family."</strong><br>
+    <span style="font-size:12px;color:var(--ink2)">— Bob Luitweiler, <em>The Seeds of Servas</em>, 1999. The founder later described what Servas had become as "a cheap housing program for the middle class." This Whitepaper is written to bring the founding spirit back.</span>
+  </div>
+
+  <h3 style="font-size:15px;margin-bottom:12px;color:var(--ink2)">5-Year Projection — Status Quo vs No Action</h3>
+  <table class="proj-table">
+    <thead><tr><th>Indicator</th><th>2026 Today</th><th>2031 — No Action</th><th>Change</th></tr></thead>
+    <tbody>
+      <tr><td>Active hosts</td><td>13,125</td><td>~9,500</td><td class="trend-down">↓ ~28%</td></tr>
+      <tr><td>Total members</td><td>16,266</td><td>~12,000</td><td class="trend-down">↓ ~26%</td></tr>
+      <tr><td>Members aged 18–40</td><td>15%</td><td>~10%</td><td class="trend-down">↓ 5 pts</td></tr>
+      <tr><td>Average member age</td><td>~63</td><td>~67</td><td class="trend-up">↑ 4 years</td></tr>
+      <tr><td>Annual revenue (CHF)</td><td>75,979</td><td>~60,000</td><td class="trend-down">↓ ~21%</td></tr>
+      <tr><td>Financial reserve (CHF)</td><td>452,867</td><td>~370,000</td><td class="trend-down">↓ ~18%</td></tr>
+      <tr><td>Annual deficit risk (CHF)</td><td>18,776</td><td>~30,000+</td><td class="trend-up">↑ increasing</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:12px;color:var(--ink3);margin-bottom:28px;font-style:italic">Based on ~20% annual exit rate, sub-1% net growth since 1992, and ~34,000 CHF/year ServasOnline amortisation through 2027. These are not worst-case figures — they reflect the existing trajectory.</p>
+
+  <h3 style="font-size:15px;margin-bottom:12px">🎯 Servas 2030: What Does Success Look Like?</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:28px">
+    <div class="infobox ib-green" style="margin:0">
+      <strong>Financial Resilience</strong><br>
+      +55,555 CHF/year from new memberships. Deficit eliminated. Stable surplus restored.
+    </div>
+    <div class="infobox ib-blue" style="margin:0">
+      <strong>Democratic Renewal</strong><br>
+      55 Owls 🦉 + 25 Roses 🌹 in governance. 5+ consultative votes held.
+    </div>
+    <div class="infobox ib-gold" style="margin:0">
+      <strong>Youth Engagement</strong><br>
+      18–40 share: 15% → 20%. 5,555 young Seekers active in the network.
+    </div>
+    <div class="infobox" style="margin:0;background:var(--purple-bg);border-left:4px solid var(--purple-border)">
+      <strong>Peace in Action</strong><br>
+      5 seminars on 5 continents. 200+ certified Peace Builder Educators (PBEs).
+    </div>
+  </div>
+
+  <div class="infobox ib-red">
+    <strong>The Couchsurfing Warning.</strong> Founded with a mission similar to Servas', Couchsurfing failed to transform its governance in time. In 2020, commercial pressure ended free access and community trust collapsed. Servas has what Couchsurfing never achieved: 70 years of peace mission, a living community, and UN standing. Structural transformation now is not a threat — it is the guarantee that protects these values.
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PAGE 2: HYBRID MODEL -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="page" id="page-model">
+<div class="container">
+  <div class="sec-eyebrow">Section II — The Solution</div>
+  <div class="sec-title">The Hybrid Membership Model 🐎</div>
+  <div class="sec-lead">The Hybrid Model complements traditional chapter-based membership with direct individual memberships and institutional partnerships, aligning Servas governance with the Swiss Civil Code and international best practices for iNGOs. It is a necessary precondition for the Peace Builders Program.</div>
+
+  <div class="member-grid">
+    <div class="member-card" style="border-top:4px solid #2d5a8a">
+      <div class="member-card-head">
+        <div class="member-icon">🌳</div>
+        <div>
+          <div class="member-name">SI Chapter</div>
+          <div class="member-type">Legal Person · SW Motion 1, 5, 6</div>
+        </div>
+      </div>
+      <div class="member-card-body">
+        Registered Servas groups that form the collective backbone of SI. Must be a legal entity under national jurisdiction. Full GA voting rights.
+        <br><span class="member-badge" style="background:#e8f0f8;color:#2d5a8a">OAK 🌳 — existing backbone</span>
+      </div>
+    </div>
+    <div class="member-card" style="border-top:4px solid #5c3d8f">
+      <div class="member-card-head">
+        <div class="member-icon">🦉</div>
+        <div>
+          <div class="member-name">SI Individual</div>
+          <div class="member-type">Natural Person · SW Motion 2</div>
+        </div>
+      </div>
+      <div class="member-card-body">
+        Experienced individuals (5+ years Servas membership) who join SI directly. Right to speak, vote, and submit motions at SIGA and Distant Votes.
+        <br><span class="member-badge" style="background:var(--purple-bg);color:var(--purple)">OWL 🦉 — target: 55 in 5 years</span>
+      </div>
+    </div>
+    <div class="member-card" style="border-top:4px solid #8b2a50">
+      <div class="member-card-head">
+        <div class="member-icon">🌹</div>
+        <div>
+          <div class="member-name">SI Representative</div>
+          <div class="member-type">Natural Person · SW Motion 7</div>
+        </div>
+      </div>
+      <div class="member-card-body">
+        A natural person appointed by groups ineligible for Chapter status (political/legal constraints). Brings structurally invisible regions into governance.
+        <br><span class="member-badge" style="background:#fde8ee;color:#8b2a50">ROSE 🌹 — target: 25 in 5 years</span>
+      </div>
+    </div>
+    <div class="member-card" style="border-top:4px solid #6b7a00">
+      <div class="member-card-head">
+        <div class="member-icon">🌻</div>
+        <div>
+          <div class="member-name">SI Social Group</div>
+          <div class="member-type">Legal Person · SW Motion 3</div>
+        </div>
+      </div>
+      <div class="member-card-body">
+        Registered NGOs/associations aligned with Servas' peace mission. One delegate with full GA voting rights. 300 CHF/year or donation-based.
+        <br><span class="member-badge" style="background:#f8f4d0;color:#6b7a00">SUNFLOWER 🌻 — target: 55 in 5 years</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="infobox ib-gold">
+    <strong>Critical clarification on Social Groups:</strong> When an NGO joins as an SI Social Group Member, this grants rights only to the organisation as a legal entity — specifically the right to appoint ONE delegate. Individual employees or volunteers of that organisation do NOT automatically become Servas members. Institutional and individual membership are fully separate.
+  </div>
+
+  <h3 style="margin:28px 0 14px;font-size:15px">Value Proposition for SI Social Groups</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
+    <div>
+      <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:10px;font-weight:bold">What Servas offers the Social Group</div>
+      <div style="font-size:13px;line-height:1.8;color:var(--ink2)">
+        🌍 <strong>Global volunteer pool</strong> — 13,125 hosts in 100+ countries<br>
+        🇺🇳 <strong>UN consultative status</strong> — peace diplomacy channel<br>
+        🗳️ <strong>GA governance voice</strong> — one delegate, full voting rights<br>
+        📚 <strong>Peace Builders access</strong> — co-design curriculum modules<br>
+        📋 <strong>Institutional credibility</strong> — supports grant applications<br>
+        🎯 <strong>SDG alignment</strong> — SDG 5, 13, 16, 17 framework
+      </div>
+    </div>
+    <div>
+      <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:10px;font-weight:bold">What the Social Group offers Servas (honest)</div>
+      <div style="font-size:13px;line-height:1.8;color:var(--ink2)">
+        💰 <strong>Financial diversification</strong> — reduces chapter-fee dependency<br>
+        🧠 <strong>Mission renewal</strong> — lived expertise from the field<br>
+        👥 <strong>Youth pipeline</strong> — 18–40 cohort already engaged<br>
+        📈 <strong>Grant eligibility</strong> — cross-sector collaboration proof
+      </div>
+      <div class="infobox ib-red" style="margin-top:10px;font-size:12px">The primary benefit flows toward Servas in early years. That asymmetry is why the pilot model exists.</div>
+    </div>
+  </div>
+
+  <h3 style="margin:0 0 14px;font-size:15px">Pilot Partnership Model (Years 1–4)</h3>
+  <table class="proj-table">
+    <thead><tr><th>Phase</th><th>Duration & Fee</th><th>Rights & Access</th><th>Milestone to Advance</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1 — Observer</strong></td><td>Year 1 · No fee</td><td>SIGA observer (no vote). Servas Online page. 1 regional meeting. 1 Peace Builders seat.</td><td>3 documented collaborations + letter of intent</td></tr>
+      <tr><td><strong>2 — Partner</strong></td><td>Years 2–3 · 60 CHF/yr</td><td>Consultative SIGA voice (no vote). Named on SOL. 2 PBS seats/cohort. Propose curriculum modules.</td><td>Annual report. SI Exco approval vote. 2-year track record.</td></tr>
+      <tr><td><strong>3 — Full Member</strong></td><td>Year 4+ · 300 CHF/yr</td><td>Full GA delegate with vote + motion rights. All Peace Builders rights. SI Annual Report listing.</td><td>SIGA or SI Exco majority vote. Annual renewal.</td></tr>
+    </tbody>
+  </table>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PAGE 3: VOTING GUIDE -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="page" id="page-motions">
+<div class="container">
+  <div class="sec-eyebrow">Appendix C — 18 Motions</div>
+  <div class="sec-title">Voting Guide for Delegates</div>
+  <div class="sec-lead">Each motion below states in plain language what passage means in practice, and what remaining on the status quo means. Click any motion to expand. Motions are grouped as in Appendix C of the Whitepaper.</div>
+
+  <div class="motion-group">
+    <div class="motion-group-title">I — Renaming &amp; Core Structure (SW Motion 1, 17)</div>
+
+    <div class="motion-card" id="m1">
+      <div class="motion-header" onclick="toggleMotion('m1')">
+        <div class="motion-tab">SW Motion 1</div>
+        <div class="motion-summary">
+          <div class="motion-title">Rename Servas Organs</div>
+          <div class="motion-desc">Standardise terminology for a professional iNGO structure</div>
+        </div>
+        <div class="motion-chevron">▾</div>
+      </div>
+      <div class="motion-body">
+        <div class="impact-grid">
+          <div class="impact-box impact-yes">
+            <div class="impact-label">✓ If passed</div>
+            <div class="impact-text">All official documents adopt: "SI Chapter" (was Servas Group), "Spokesperson" (was National Secretary), "SI Group" (was National Servas Group), "Seekers" replacing Hosts/Travelers. Servas aligns with Swiss Civil Code and iNGO norms.</div>
+          </div>
+          <div class="impact-box impact-no">
+            <div class="impact-label">✗ If not passed</div>
+            <div class="impact-text">Legacy terminology remains. Inconsistencies with the Swiss Civil Code framework continue. Motions 2, 3, 4, 7, 8 can still proceed but with unclear reference terms — creating governance ambiguity.</div>
+          </div>
+        </div>
+        <div class="motion-note"><strong>Note:</strong> This is a prerequisite motion. Rejecting it doesn't block the Hybrid Model but reduces structural clarity across all other motions.</div>
+      </div>
+    </div>
+
+    <div class="motion-card" id="m17">
+      <div class="motion-header" onclick="toggleMotion('m17')">
+        <div class="motion-tab">SW Motion 17</div>
+        <div class="motion-summary">
+          <div class="motion-title">Seekers Identity</div>
+          <div class="motion-desc">Redefine all members as active "Seekers" rather than passive Hosts or Travelers</div>
+        </div>
+        <div class="motion-chevron">▾</div>
+      </div>
+      <div class="motion-body">
+        <div class="impact-grid">
+          <div class="impact-box impact-yes">
+            <div class="impact-label">✓ If passed</div>
+            <div class="impact-text">The identity of every Servas participant shifts from a transactional role (hosting, traveling) to a mission-driven identity. "Seeker" appears on membership cards, ServasOnline profiles, and all official communications. This directly addresses Bob Luitweiler's "cheap housing" critique.</div>
+          </div>
+          <div class="impact-box impact-no">
+            <div class="impact-label">✗ If not passed</div>
+            <div class="impact-text">Host/Traveler distinction remains. The philosophical reorientation — from passive observer to active peace agent — is not formalised in the Statutes.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="motion-group">
+    <div class="motion-group-title">II — Individual &amp; Social Group Membership (SW Motions 2, 3, 7, 8)</div>
+
+    <div class="motion-card" id="m2">
+      <div class="motion-header" onclick="toggleMotion('m2')">
+        <div class="motion-tab">SW Motion 2</div>
+        <div class="motion-summary">
+          <div class="motion-title">SI Individual Member — Owl 🦉</div>
+          <div class="motion-desc">Allow experienced individuals (5+ years) to join SI directly with full voting rights</div>
+        </div>
+        <div class="motion-chevron">▾</div>
+      </div>
+      <div class="motion-body">
+        <div class="impact-grid">
+          <div class="impact-box impact-yes">
+            <div class="impact-label">✓ If passed</div>
+            <div class="impact-text">Experienced members (5+ years, fee-paying) may apply directly to SI: speak, vote, and submit motions at SIGA and Distant Votes independently of their Chapter. Individual membership coexists with Chapter membership — it does not replace it. Target: 55 Owls in 5 years.</div>
+          </div>
+          <div class="impact-box impact-no">
+            <div class="impact-label">✗ If not passed</div>
+            <div class="impact-text">Individual direct membership remains impossible. Governance continues through chapter delegates only. The democratic deficit identified in the 2024 Audit is not addressed structurally. Motions 13 and 14 lose their primary beneficiaries.</div>
+          </div>
+        </div>
+        <div class="motion-note"><strong>Key condition:</strong> 5+ years Servas membership. Individual and Chapter membership fully coexist.</div>
+        <span class="xref" onclick="showPage('qa');filterTopic('democracy')">→ See Q&A on democracy: Q.3, Q.8, Q.16, Q.29</span>
+      </div>
+    </div>
+
+    <div class="motion-card" id="m3">
+      <div class="motion-header" onclick="toggleMotion('m3')">
+        <div class="motion-tab">SW Motion 3</div>
+        <div class="motion-summary">
+          <div class="motion-title">SI Social Group — Sunflower 🌻</div>
+          <div class="motion-desc">Allow registered NGOs aligned with Servas' mission to become institutional members</div>
+        </div>
+        <div class="motion-chevron">▾</div>
+      </div>
+      <div class="motion-body">
+        <div class="impact-grid">
+          <div class="impact-box impact-yes">
+            <div class="impact-label">✓ If passed</div>
+            <div class="impact-text">Registered NGOs in peace, human rights, environmental fields may apply. Each appoints ONE delegate with GA voting rights. Pilot model: Year 1 free (observer), Years 2–3 at 60 CHF (partner), Year 4+ at 300 CHF (full member). Target: 55 Sunflowers in 5 years.</div>
+          </div>
+          <div class="impact-box impact-no">
+            <div class="impact-label">✗ If not passed</div>
+            <div class="impact-text">Civil society organisations cannot formally join SI. Youth pipeline, SDG alignment, and grant eligibility advantages are inaccessible. Revenue diversification limited to chapter fees and donations — the structural vulnerability the Audit Committee warned against.</div>
+          </div>
+        </div>
+        <div class="motion-note"><strong>Critical:</strong> Individual members of Social Groups do NOT automatically become Servas members. Fully separate tracks.</div>
+        <span class="xref" onclick="showPage('qa');filterTopic('social')">→ See Q&A on Social Groups: Q.6, Q.23, Q.24, Q.26, Q.28</span>
+      </div>
+    </div>
+
+    <div class="motion-card" id="m7">
+      <div class="motion-header" onclick="toggleMotion('m7')">
+        <div class="motion-tab">SW Motion 7</div>
+        <div class="motion-summary">
+          <div class="motion-title">SI Representative — Rose 🌹</div>
+          <div class="motion-desc">Give groups ineligible for Chapter status a formal individual representative at SI</div>
+        </div>
+        <div class="motion-chevron">▾</div>
+      </div>
+      <div class="motion-body">
+        <div class="impact-grid">
+          <div class="impact-box impact-yes">
+            <div class="impact-label">✓ If passed</div>
+            <div class="impact-text">Groups in politically or legally constrained regions (Algeria, Nigeria, Zimbabwe, etc.) can nominate a natural person as SI Representative with full GA voting and motion rights. Approved by SIGA or SI Exco. Target: 25 Roses in 5 years.</div>
+          </div>
+          <div class="impact-box impact-no">
+            <div class="impact-label">✗ If not passed</div>
+            <div class="impact-text">Countries unable to register as formal chapters remain structurally invisible in SI governance. Their members have no vote and no formal voice at SIGA regardless of commitment or activity level.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="motion-card" id="m8">
+      <div class="motion-header" onclick="toggleMotion('m8')">
+        <div class="motion-tab">SW Motion 8</div>
+        <div class="motion-summary">
+          <div class="motion-title">Formalise Four Membership Types</div>
+          <div class="motion-desc">Write the four new member categories into the SI Statutes</div>
+        </div>
+        <div class="motion-chevron">▾</div>
+      </div>
+      <div class="motion-body">
+        <div class="impact-grid">
+          <div class="impact-box impact-yes">
+            <div class="impact-label">✓ If passed</div>
+            <div class="impact-text">Statutes formally recognise: SI Chapter (Legal Person), SI Social Group (Legal Person), SI Individual (Natural Person), SI Representative (Natural Person). Aligns Servas with the Swiss Civil Code and creates the legal foundation for all other Hybrid Model motions.</div>
+          </div>
+          <div class="impact-box impact-no">
+            <div class="impact-label">✗ If not passed</div>
+            <div class="impact-text">Even if Motions 2, 3, and 7 pass individually, the Statutes remain internally inconsistent. SI lacks a clear legal framework — creating governance uncertainty for new member types.</div>
+          </div>
+        </div>
+        <div class="motion-note"><strong>Note:</strong> This is the legal consolidation motion. It codifies what Motions 2, 3, and 7 create.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="motion-group">
+    <div class="motion-group-title">III — Chapter Obligations &amp; SI Exco Authority (SW Motions 4, 5, 6)</div>
+
+    <div class="motion-card" id="m4">
+      <div class="motion-header" onclick="toggleMotion('m4')">
+        <div class="motion-tab">SW Motion 4</div>
+        <div class="motion-summary"><div class="motion-title">Exco Approval for Memberships</div><div class="motion-desc">Let SI Exco approve new applications — eliminating 2–3 year SIGA wait</div></div>
+        <div class="motion-chevron">▾</div>
+      </div>
+      <div class="motion-body">
+        <div class="impact-grid">
+          <div class="impact-box impact-yes"><div class="impact-label">✓ If passed</div><div class="impact-text">SI Exco gains authority alongside SIGA to approve memberships for groups with 10+ hosts. New groups can join in months, not years — critical for meeting 5-year KPI targets.</div></div>
+          <div class="impact-box impact-no"><div class="impact-label">✗ If not passed</div><div class="impact-text">New chapters and social groups still require full SIGA approval. Pilot growth targets are harder to achieve within the 5-year KPI window.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="motion-card" id="m5">
+      <div class="motion-header" onclick="toggleMotion('m5')">
+        <div class="motion-tab">SW Motion 5</div>
+        <div class="motion-summary"><div class="motion-title">Admission / Loss of Chapter Status</div><div class="motion-desc">Define clear criteria for when a Chapter gains or loses its status</div></div>
+        <div class="motion-chevron">▾</div>
+      </div>
+      <div class="motion-body">
+        <div class="impact-grid">
+          <div class="impact-box impact-yes"><div class="impact-label">✓ If passed</div><div class="impact-text">Status formally lost if: no spokesperson for 2 years, fewer than 10 hosts, or failure to meet obligations. Prevents dormant chapters from distorting the democratic count.</div></div>
+          <div class="impact-box impact-no"><div class="impact-label">✗ If not passed</div><div class="impact-text">No formal mechanism to address inactive chapters. GA voting pool can include chapters that no longer function, weakening democratic legitimacy.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="motion-card" id="m6">
+      <div class="motion-header" onclick="toggleMotion('m6')">
+        <div class="motion-tab">SW Motion 6</div>
+        <div class="motion-summary"><div class="motion-title">Legal Person Requirement for Chapters</div><div class="motion-desc">Chapters must be registered legal entities under their national jurisdiction</div></div>
+        <div class="motion-chevron">▾</div>
+      </div>
+      <div class="motion-body">
+        <div class="impact-grid">
+          <div class="impact-box impact-yes"><div class="impact-label">✓ If passed</div><div class="impact-text">Formal alignment with the Swiss Civil Code. Unregistered groups are reclassified as SI Groups — preserving their participation but removing GA voting rights until registration is achieved.</div></div>
+          <div class="impact-box impact-no"><div class="impact-label">✗ If not passed</div><div class="impact-text">Swiss Civil Code distinction cannot be enforced in Servas governance. The Hybrid Model's legal architecture is weakened at its foundation.</div></div>
+        </div>
+        <div class="motion-note"><strong>Note:</strong> Groups in countries where registration is difficult should transition to SI Representative status (Motion 7), not be excluded.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="motion-group">
+    <div class="motion-group-title">IV — Governance, Voting &amp; Participation (SW Motions 9–16)</div>
+
+    <div class="motion-card" id="m9">
+      <div class="motion-header" onclick="toggleMotion('m9')">
+        <div class="motion-tab">SW Motion 9</div>
+        <div class="motion-summary"><div class="motion-title">GA Delegation Rules</div><div class="motion-desc">Define who constitutes a delegation at SIGA under the Hybrid Model</div></div>
+        <div class="motion-chevron">▾</div>
+      </div>
+      <div class="motion-body">
+        <div class="impact-grid">
+          <div class="impact-box impact-yes"><div class="impact-label">✓ If passed</div><div class="impact-text">One delegate per Legal Person (Chapter / Social Group) and each Natural Person (Individual / Representative) present. Clear, enforceable rules for hybrid assemblies.</div></div>
+          <div class="impact-box impact-no"><div class="impact-label">✗ If not passed</div><div class="impact-text">GA delegation rules remain undefined for new member types. Individual and Social Group members have no procedural standing even if admitted via Motions 2, 3, 7.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="motion-card" id="m10">
+      <div class="motion-header" onclick="toggleMotion('m10')">
+        <div class="motion-tab">SW Motion 10</div>
+        <div class="motion-summary"><div class="motion-title">Online General Assembly (O-SIGA)</div><div class="motion-desc">Authorise SI Exco to call an Annual Online General Assembly</div></div>
+        <div class="motion-chevron">▾</div>
+      </div>
+      <div class="motion-body">
+        <div class="impact-grid">
+          <div class="impact-box impact-yes"><div class="impact-label">✓ If passed</div><div class="impact-text">An Annual Online GA (O-SIGA) can be held in years between in-person SIGAs. Replaces or supplements Distant Voting with real-time deliberation accessible to all member types globally.</div></div>
+          <div class="impact-box impact-no"><div class="impact-label">✗ If not passed</div><div class="impact-text">Governance decisions remain concentrated in the 3-year SIGA cycle. New individual and social group members have limited opportunities to exercise their rights between conferences.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="motion-card" id="m11">
+      <div class="motion-header" onclick="toggleMotion('m11')">
+        <div class="motion-tab">SW Motion 11</div>
+        <div class="motion-summary"><div class="motion-title">Item Submission Rights</div><div class="motion-desc">Expand who can submit agenda items to SIGA beyond National Secretaries</div></div>
+        <div class="motion-chevron">▾</div>
+      </div>
+      <div class="motion-body">
+        <div class="impact-grid">
+          <div class="impact-box impact-yes"><div class="impact-label">✓ If passed</div><div class="impact-text">Legal Persons (Chapters, Social Groups), Individual Members, and SI Exco can all submit items. Combined with SW Motion 15, this opens agenda-setting to the full membership.</div></div>
+          <div class="impact-box impact-no"><div class="impact-label">✗ If not passed</div><div class="impact-text">Agenda control remains exclusively with National Secretaries and SI Exco. Individual members and Social Groups have no formal right to raise issues at the GA.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="motion-card" id="m12">
+      <div class="motion-header" onclick="toggleMotion('m12')">
+        <div class="motion-tab">SW Motion 12</div>
+        <div class="motion-summary"><div class="motion-title">Decisions of SIGA — Recording</div><div class="motion-desc">Mandate formal recording and distribution of GA decisions to all SI Members</div></div>
+        <div class="motion-chevron">▾</div>
+      </div>
+      <div class="motion-body">
+        <div class="impact-grid">
+          <div class="impact-box impact-yes"><div class="impact-label">✓ If passed</div><div class="impact-text">Decisions formally recorded and distributed to all SI Members — not just chapter spokespeople. Individual and Social Group members receive the same information as chapter delegates. Supports KPI #10 (transparency).</div></div>
+          <div class="impact-box impact-no"><div class="impact-label">✗ If not passed</div><div class="impact-text">Transparency gap remains. New member types may participate in votes but receive no formal communication about outcomes.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="motion-card" id="m13">
+      <div class="motion-header" onclick="toggleMotion('m13')">
+        <div class="motion-tab">SW Motion 13</div>
+        <div class="motion-summary"><div class="motion-title">GA Voting Rights for All Member Types</div><div class="motion-desc">Grant all SI Member types the right to speak and vote at SIGA</div></div>
+        <div class="motion-chevron">▾</div>
+      </div>
+      <div class="motion-body">
+        <div class="impact-grid">
+          <div class="impact-box impact-yes"><div class="impact-label">✓ If passed</div><div class="impact-text">Individual Members and SI Representatives have the same speaking and voting rights as Chapter delegates at SIGA. This is the central democratic opening of the Hybrid Model — without it, new member types exist on paper but are mute in practice.</div></div>
+          <div class="impact-box impact-no"><div class="impact-label">✗ If not passed</div><div class="impact-text">Even if Motions 2, 3, 7 pass, new members have no formal voice at the GA. Democratic reform is structurally incomplete.</div></div>
+        </div>
+        <span class="xref" onclick="showPage('qa');filterTopic('democracy')">→ See Q&A #3, #8, #29</span>
+      </div>
+    </div>
+
+    <div class="motion-card" id="m14">
+      <div class="motion-header" onclick="toggleMotion('m14')">
+        <div class="motion-tab">SW Motion 14</div>
+        <div class="motion-summary"><div class="motion-title">Distant Voting Rights for All Member Types</div><div class="motion-desc">Extend inter-SIGA voting to Individual and Social Group members</div></div>
+        <div class="motion-chevron">▾</div>
+      </div>
+      <div class="motion-body">
+        <div class="impact-grid">
+          <div class="impact-box impact-yes"><div class="impact-label">✓ If passed</div><div class="impact-text">All SI Member types participate in Distant Votes between SIGAs. Individual members living far from chapter headquarters are no longer excluded from inter-cycle governance.</div></div>
+          <div class="impact-box impact-no"><div class="impact-label">✗ If not passed</div><div class="impact-text">Distant Voting remains a chapter-only mechanism. A two-tier participation structure emerges: new members vote at SIGA but not between SIGAs.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="motion-card" id="m15">
+      <div class="motion-header" onclick="toggleMotion('m15')">
+        <div class="motion-tab">SW Motion 15</div>
+        <div class="motion-summary"><div class="motion-title">Member-Led Motions</div><div class="motion-desc">Allow five chapter members jointly to submit a motion — bypassing sole National Secretary approval</div></div>
+        <div class="motion-chevron">▾</div>
+      </div>
+      <div class="motion-body">
+        <div class="impact-grid">
+          <div class="impact-box impact-yes"><div class="impact-label">✓ If passed</div><div class="impact-text">Any five Seekers from an SI Chapter can jointly submit a motion to SIGA. A National Secretary can no longer unilaterally block members from raising issues. Significant anti-bottleneck reform.</div></div>
+          <div class="impact-box impact-no"><div class="impact-label">✗ If not passed</div><div class="impact-text">Motion submission remains with National Secretaries and SI Exco. Members who disagree with their NS have no formal mechanism to raise concerns at the GA.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="motion-card" id="m16">
+      <div class="motion-header" onclick="toggleMotion('m16')">
+        <div class="motion-tab">SW Motion 16</div>
+        <div class="motion-summary"><div class="motion-title">Consultative Voting</div><div class="motion-desc">Online non-binding pre-votes open to all Seekers before formal GA decisions</div></div>
+        <div class="motion-chevron">▾</div>
+      </div>
+      <div class="motion-body">
+        <div class="impact-grid">
+          <div class="impact-box impact-yes"><div class="impact-label">✓ If passed</div><div class="impact-text">All Seekers (hosts and travelers) cast non-binding votes before any formal SIGA or Distant Vote. Results shared with delegates before they vote. Broader membership voice; richer, more legitimate decisions. KPI #11: 5 consultative votes in 5 years.</div></div>
+          <div class="impact-box impact-no"><div class="impact-label">✗ If not passed</div><div class="impact-text">16,000+ Seekers who are not formal delegates remain voiceless in SI governance. Democratic renewal is limited to the smaller group of admitted Individual Members.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="motion-group">
+    <div class="motion-group-title">V — Peace Builders Project (SW Motion 18)</div>
+    <div class="motion-card" id="m18">
+      <div class="motion-header" onclick="toggleMotion('m18')">
+        <div class="motion-tab">SW Motion 18</div>
+        <div class="motion-summary"><div class="motion-title">Peace Builders Project</div><div class="motion-desc">Create a professional team and fund the 100-hour Peace Builders Education Program</div></div>
+        <div class="motion-chevron">▾</div>
+      </div>
+      <div class="motion-body">
+        <div class="impact-grid">
+          <div class="impact-box impact-yes"><div class="impact-label">✓ If passed</div><div class="impact-text">Peace Builders Committee (3–5 people) established. SI commits 36,000 CHF over 3 years (from donations + Hybrid Model revenue). Paris pilot 2027. Graduates become certified Peace Builder Educators (PBEs) who train others during host/traveler stays — the multiplier effect. KPI #4: 5 seminars on 5 continents in 5 years.</div></div>
+          <div class="impact-box impact-no"><div class="impact-label">✗ If not passed</div><div class="impact-text">The Hybrid Model's visionary pillar does not launch. Servas remains a hosting network without a structured peace education offering. The youth engagement and demographic renewal strategy loses its primary vehicle.</div></div>
+        </div>
+        <div class="motion-note"><strong>On trainer readiness:</strong> First PBE cohort drawn from existing Peace School facilitators and AVP-certified trainers. Peace Schools and Peace Builders develop in parallel — the program creates its own trainer pipeline from day one.</div>
+        <span class="xref" onclick="showPage('qa');filterTopic('peace')">→ See Q&A on Peace Builders: Q.9, Q.19, Q.30</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PAGE 4: KPIs & RISKS -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="page" id="page-kpi">
+<div class="container">
+  <div class="sec-eyebrow">Sections IV &amp; V</div>
+  <div class="sec-title">KPIs &amp; Risk Mitigation</div>
+  <div class="sec-lead">12 SMART KPIs track the 5-year roadmap. Each has a named owner (IPT = Innovation Project Team). 10 identified risks have explicit mitigation strategies.</div>
+
+  <h3 style="font-size:15px;margin-bottom:14px">12 Key Performance Indicators — 5 Year Targets</h3>
+  <div class="kpi-grid">
+    <div class="kpi-card"><div class="kpi-num">KPI #1</div><div class="kpi-indicator">55,555 🐿️</div><div class="kpi-target">Total Squirrels (Seekers) · in 5 years</div><div class="kpi-owner">Owner: IPT</div></div>
+    <div class="kpi-card"><div class="kpi-num">KPI #2</div><div class="kpi-indicator">55 🦉</div><div class="kpi-target">SI Individual Members (Owls) · in 5 years</div><div class="kpi-owner">Owner: IPT</div></div>
+    <div class="kpi-card"><div class="kpi-num">KPI #3</div><div class="kpi-indicator">+55,555 CHF</div><div class="kpi-target">Income increase · in 5 years</div><div class="kpi-owner">Owner: IPT</div></div>
+    <div class="kpi-card"><div class="kpi-num">KPI #4</div><div class="kpi-indicator">5 🕊️</div><div class="kpi-target">Peace Builders Seminars · in 5 years</div><div class="kpi-owner">Owner: IPT, SI PS</div></div>
+    <div class="kpi-card"><div class="kpi-num">KPI #5</div><div class="kpi-indicator">5 Motions</div><div class="kpi-target">By Seekers at GA · SIGA 2028</div><div class="kpi-owner">Owner: IPT, SI Exco</div></div>
+    <div class="kpi-card"><div class="kpi-num">KPI #6</div><div class="kpi-indicator">5,555 🐿️</div><div class="kpi-target">Squirrels aged 18–40 · in 5 years</div><div class="kpi-owner">Owner: IPT, Youth</div></div>
+    <div class="kpi-card"><div class="kpi-num">KPI #7</div><div class="kpi-indicator">55 🌻</div><div class="kpi-target">SI Social Groups (Sunflowers) · in 5 years</div><div class="kpi-owner">Owner: IPT, SI VP</div></div>
+    <div class="kpi-card"><div class="kpi-num">KPI #8</div><div class="kpi-indicator">25 🌹</div><div class="kpi-target">SI Representatives (Roses) · in 5 years</div><div class="kpi-owner">Owner: IPT, SI VP</div></div>
+    <div class="kpi-card"><div class="kpi-num">KPI #9</div><div class="kpi-indicator">5 🌳</div><div class="kpi-target">New SI Chapters (Oaks) · in 5 years</div><div class="kpi-owner">Owner: IPT, SI VP</div></div>
+    <div class="kpi-card"><div class="kpi-num">KPI #10</div><div class="kpi-indicator">5 Articles</div><div class="kpi-target">In SI News Bulletin · in 5 years</div><div class="kpi-owner">Owner: IPT</div></div>
+    <div class="kpi-card"><div class="kpi-num">KPI #11</div><div class="kpi-indicator">5 Votes</div><div class="kpi-target">Consultative votes with Seekers · in 5 years</div><div class="kpi-owner">Owner: IPT, SI VP</div></div>
+    <div class="kpi-card"><div class="kpi-num">KPI #12</div><div class="kpi-indicator">Exco Approval</div><div class="kpi-target">Membership approval launched · SIGA 2028</div><div class="kpi-owner">Owner: IPT, SI Exco</div></div>
+  </div>
+
+  <h3 style="font-size:15px;margin:28px 0 14px">Risk–Mitigation Matrix</h3>
+  <table class="risk-table">
+    <thead><tr><th style="width:22%">Risk Area</th><th style="width:38%">Identified Risk</th><th>Mitigation Strategy</th></tr></thead>
+    <tbody>
+      <tr><td><div class="risk-area">Implementation Pace</div><span class="risk-level rl-med">Medium</span></td><td>Transition progresses more slowly than anticipated in the first years.</td><td>Phased implementation with annual review points; realistic uptake targets; early years focus on learning, not rapid growth.</td></tr>
+      <tr><td><div class="risk-area">Governance Complexity</div><span class="risk-level rl-med">Medium</span></td><td>Increased participation leads to unclear communication channels or governance overload.</td><td>Establish the <em>Servas Communication Committee (SCC)</em> once defined thresholds are reached; clarify mandates through a formal SIGA-approved motion.</td></tr>
+      <tr><td><div class="risk-area">Financial Volatility</div><span class="risk-level rl-high">High</span></td><td>Individual membership growth or donation income falls below projections.</td><td>Continuous SI Treasurer monitoring; conservative budgeting; diversification of income sources; annual assumption adjustment.</td></tr>
+      <tr><td><div class="risk-area">Member Engagement</div><span class="risk-level rl-med">Medium</span></td><td>Individual Members feel disconnected from chapters or decision-making processes.</td><td>Structured onboarding, mentoring, and participation pathways; transparent communication and meaningful contribution opportunities.</td></tr>
+      <tr><td><div class="risk-area">Equity &amp; Inclusion</div><span class="risk-level rl-med">Medium</span></td><td>Underrepresented communities remain excluded despite the new model.</td><td>Targeted outreach, reduced-fee options, and partnerships aligned with Servas' peace mission; track diversity indicators.</td></tr>
+      <tr><td><div class="risk-area">Peace Builders Effectiveness</div><span class="risk-level rl-low">Low-Med</span></td><td>Curriculum does not achieve intended learning or impact outcomes.</td><td>Clear evaluation metrics; participant feedback collection; pilot and refine before large-scale rollout.</td></tr>
+      <tr><td><div class="risk-area">Program Scalability</div><span class="risk-level rl-low">Low-Med</span></td><td>Difficulties adapting Peace Builders across regions and cultures.</td><td>Allow regional customization within a shared framework; facilitator training; peer learning between regions.</td></tr>
+      <tr><td><div class="risk-area">Philosophical Coherence</div><span class="risk-level rl-med">Medium</span></td><td>Model perceived as technical/financial change rather than values-based evolution.</td><td>Coherent communication strategy via SCC emphasising conscious unity and Servas' ethical foundations.</td></tr>
+      <tr><td><div class="risk-area">Cultural Resistance</div><span class="risk-level rl-high">High</span></td><td>Long-standing members perceive the model as a threat to chapter-based identity.</td><td>Frame as complementary, not substitutive; engage chapters early; create dialogue spaces (Servas Agora).</td></tr>
+      <tr><td><div class="risk-area">Data Protection</div><span class="risk-level rl-med">Medium</span></td><td>Increased individual members and digital financial transactions create data risks.</td><td>SSL encryption, industry-standard safeguards, regular audits by the Membership &amp; Technology Secretary.</td></tr>
+    </tbody>
+  </table>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PAGE 5: SERVAS AGORA -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="page" id="page-agora">
+<div class="container">
+  <div class="sec-eyebrow">Section VI</div>
+  <div class="sec-title">Servas Agora: Global Dialogue for Renewal 🏺</div>
+  <div class="sec-lead">[Esperanto: Servas Agora: Tutmonda Dialogo por Renovigo] — A facilitated global dialogue process to build understanding of the Whitepaper and prepare for SICOGA 2028.</div>
+
+  <div class="infobox ib-red" style="margin-bottom:24px">
+    <strong>Contingent on the appointment of the Innovation Project Team (Motion 18).</strong> The Servas Agora is not a pre-existing platform — it is a facilitated dialogue process that will be designed and launched by the Innovation Project Team following its appointment by SI Exco. Until the Team is in place, no binding commitments regarding platform architecture or technical specifications should be assumed. The Servas Peace Forum and Servas Agora can work together as a joint event.
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px">
+    <div>
+      <h3 style="font-size:14px;margin-bottom:10px">Purpose</h3>
+      <ul style="font-size:13px;color:var(--ink2);line-height:2;padding-left:18px">
+        <li>Present the Servas Whitepaper 2026 and its transformative vision</li>
+        <li>Foster global dialogue on the Hybrid Membership Model</li>
+        <li>Empower branches to localise Peace Builders and Open Doors initiatives</li>
+        <li>Prepare for strategic motions at SICOGA 2028 and OSIGA 2027</li>
+      </ul>
+    </div>
+    <div>
+      <h3 style="font-size:14px;margin-bottom:10px">Who Should Join?</h3>
+      <ul style="font-size:13px;color:var(--ink2);line-height:2;padding-left:18px">
+        <li>Spokespeople (National Secretaries), SI Officers, Seekers</li>
+        <li>Peace Builders Coordinators</li>
+        <li>Youth and Family Representatives</li>
+        <li>ServasOnline and Communication Leads</li>
+        <li>Innovation Project Team Members</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="font-size:14px;margin-bottom:12px">Timeline Overview</h3>
+  <table class="timeline-table">
+    <thead><tr><th>Phase</th><th>Dates</th><th>Focus</th></tr></thead>
+    <tbody>
+      <tr><td><span class="timeline-phase">Launch &amp; Invitation</span></td><td>Q4 2026</td><td>Forum announcement, registration opens</td></tr>
+      <tr><td><span class="timeline-phase">Regional Pre-Forums</span></td><td>Q1 2027</td><td>Continental online sessions to build momentum</td></tr>
+      <tr><td><span class="timeline-phase">Forum Design &amp; Promotion</span></td><td>Q2 2027</td><td>Agenda, speakers, and outreach campaign</td></tr>
+      <tr><td><span class="timeline-phase">Main Forum: Servas Agora</span></td><td>Q3 2027</td><td>2-day global online event with panels, breakout rooms, and Q&amp;A</td></tr>
+      <tr><td><span class="timeline-phase">Follow-up Dialogues</span></td><td>Q4 2027</td><td>Regional workshops and Peace Builders onboarding</td></tr>
+      <tr><td><span class="timeline-phase">Strategic Preparation</span></td><td>Q1 2028</td><td>SICOGA motion drafting and delegate coordination</td></tr>
+      <tr><td><span class="timeline-phase">Forum Wrap-Up</span></td><td>Q2 2028</td><td>Evaluation, impact report, and next steps</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-size:14px;margin:24px 0 14px">13 Discussion Topics for the Agora</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px">
+    <div class="infobox ib-blue" style="margin:0;font-size:13px"><strong>1. Fast-Track for Youth:</strong> A fast-track SI Individual membership path for Peace Builders graduates and Peace School alumni — bypassing the 5-year seniority requirement.</div>
+    <div class="infobox ib-blue" style="margin:0;font-size:13px"><strong>2. Institutionalise Servas Agora:</strong> Should Agora be enshrined in statutes as a mandatory consultation mechanism prior to formal decision-making?</div>
+    <div class="infobox ib-blue" style="margin:0;font-size:13px"><strong>3. Member-Led Motions (SW Motion 15):</strong> Digital upvoting system on ServasOnline for the 5-member motion right.</div>
+    <div class="infobox ib-gold" style="margin:0;font-size:13px"><strong>4. AVP Certification Standard:</strong> AVP modules within PBP's 100-hour training should comply with AVP Basic Workshop standards (18–22 hrs). Dual certificate: Servas + AVP.</div>
+    <div class="infobox ib-gold" style="margin:0;font-size:13px"><strong>5. Home-schooling Metrics:</strong> A concrete assessment form for PBE credits during home-schooling, modelled on AVP Feedback &amp; Evaluation forms.</div>
+    <div class="infobox ib-gold" style="margin:0;font-size:13px"><strong>6. Academic Credit &amp; Accreditation:</strong> UNESCO accreditation goal transformed into ECTS "social responsibility credits" through university protocols.</div>
+    <div class="infobox ib-gold" style="margin:0;font-size:13px"><strong>7. Professor-Guardianship Model:</strong> Professors as Servas Interviewers for students — reducing membership bureaucracy for youth applicants.</div>
+    <div class="infobox" style="margin:0;font-size:13px;background:var(--purple-bg);border-left:4px solid var(--purple-border)"><strong>8. Digital Portfolio &amp; Visibility:</strong> A "Global Citizenship Portfolio" on ServasOnline for young members — volunteer work, peace trainings, and cultural articles as public CVs.</div>
+    <div class="infobox" style="margin:0;font-size:13px;background:var(--purple-bg);border-left:4px solid var(--purple-border)"><strong>9. SDG Alignment for Social Groups:</strong> Clear metrics for NGO SDG alignment (e.g. SDG 16: Peace &amp; Justice) as a condition and benefit of Social Group membership.</div>
+    <div class="infobox ib-green" style="margin:0;font-size:13px"><strong>10. Professionalization &amp; Automation:</strong> Centralised automated payment systems — transparent, relieving financial burden on national chapters. Aligns with 2024 Audit diversification recommendation.</div>
+    <div class="infobox ib-green" style="margin:0;font-size:13px"><strong>11. "Seeker" Terminology Population:</strong> Abandon "Host" and "Traveler" everywhere — membership cards, web interface, ServasOnline profiles. Prevents Servas being perceived as "a lodging app."</div>
+    <div class="infobox ib-green" style="margin:0;font-size:13px"><strong>12. Use of Symbols:</strong> Owl, Sunflower, Oak, Rose — used actively in social media and certificates as "peace merit" indicators, not merely icons.</div>
+    <div class="infobox ib-green" style="margin:0;font-size:13px"><strong>13. Micro-Grants:</strong> Peace Builders graduates with social projects in their portfolios can apply for mini-grants of 200–500 CHF to realise their initiatives.</div>
+  </div>
+
+  <div style="margin-top:20px">
+    <a href="https://forms.gle/ipzDBB6p3kszCfqh7" target="_blank" style="display:inline-block;background:var(--ink);color:var(--gold-border);padding:10px 22px;border-radius:var(--r);text-decoration:none;font-size:13px;letter-spacing:.06em">Join the Servas Agora ↗</a>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PAGE 6: Q&A INDEX -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="page" id="page-qa">
+<div class="container">
+  <div class="sec-eyebrow">Appendix B — 30 Questions &amp; Answers</div>
+  <div class="sec-title">Q&amp;A Index by Topic</div>
+  <div class="sec-lead">Click any question to expand a brief summary. Tap a topic pill to filter. Questions marked 🇩🇰 were raised at Servas Denmark General Assembly (April 2026). New to the Whitepaper? Start with Q.1, Q.7, Q.9, Q.12.</div>
+
+  <div class="qa-topics" id="topic-filters">
+    <div class="topic-pill active" onclick="filterTopic('all')">All 30</div>
+    <div class="topic-pill" onclick="filterTopic('structure')">Structure & Transition</div>
+    <div class="topic-pill" onclick="filterTopic('democracy')">Democracy & Power</div>
+    <div class="topic-pill" onclick="filterTopic('finance')">Finance</div>
+    <div class="topic-pill" onclick="filterTopic('peace')">Peace Builders</div>
+    <div class="topic-pill" onclick="filterTopic('social')">Social Groups</div>
+    <div class="topic-pill" onclick="filterTopic('val')">Values & Mandate</div>
+    <div class="topic-pill" onclick="filterTopic('expert')">Expert Reviews</div>
+  </div>
+
+  <div class="qa-block" data-topics="structure democracy finance val">
+    <div class="qa-block-title"><span class="qa-block-icon">⏰</span>Why change is needed — and why now</div>
+    <div class="qa-row" onclick="toggleQA('q1')" data-topic="structure">
+      <div class="qa-qnum">Q.1</div><div class="qa-qtext">Why do we need a hybrid membership model now?</div>
+      <div class="qa-tags"><span class="qa-tag t-struct">Structure</span></div>
+    </div>
+    <div class="qa-panel" id="q1">Explains the convergence of three crises: demographic imbalance (60% over 60), financial fragility (CHF 12,331 deficit in 2024), and structural stagnation (sub-1% growth for 30 years). Argues 2026 is the last comfortable window for reform. See Section I, Cost of Inaction table.</div>
+    <div class="qa-row" onclick="toggleQA('q11')" data-topic="finance">
+      <div class="qa-qnum">Q.11</div><div class="qa-qtext">Is this primarily a financial reform?</div>
+      <div class="qa-tags"><span class="qa-tag t-fin">Finance</span></div>
+    </div>
+    <div class="qa-panel" id="q11">No. Financial resilience is a necessary condition, not the goal. The goal is a "conscious community of free, self-determining spirits." Finance is the foundation, not the vision.</div>
+    <div class="qa-row" onclick="toggleQA('q14')" data-topic="val">
+      <div class="qa-qnum">Q.14</div><div class="qa-qtext">"Isn't this really about money rather than values?"</div>
+      <div class="qa-tags"><span class="qa-tag t-val">Values</span></div>
+    </div>
+    <div class="qa-panel" id="q14">Addresses the concern directly. Structural reform is the vehicle; peace mission renewal is the destination. The Whitepaper is framed as a values-based evolution — not a financial rescue plan.</div>
+    <div class="qa-row" onclick="toggleQA('q20')" data-topic="val">
+      <div class="qa-qnum">Q.20</div><div class="qa-qtext">"How does this proposal remain faithful to the spirit of Servas?"</div>
+      <div class="qa-tags"><span class="qa-tag t-val">Values</span></div>
+    </div>
+    <div class="qa-panel" id="q20">Connects the proposal to Bob Luitweiler's original Work-Study-Travel vision and his explicit critique of Servas becoming a "cheap housing program." The Hybrid Model is framed as restoration, not revolution.</div>
+    <div class="qa-row" onclick="toggleQA('q21')" data-topic="val">
+      <div class="qa-qnum">Q.21</div><div class="qa-qtext">"Is this proposal philosophical rather than practical?"</div>
+      <div class="qa-tags"><span class="qa-tag t-val">Values</span></div>
+    </div>
+    <div class="qa-panel" id="q21">The philosophical and operational dimensions are intentionally integrated. Main sections stand independently for practitioner readers. Appendix F (Visionary Foundations: Kant, Dostoyevsky, Steiner) provides full philosophical depth for those who want it.</div>
+    <div class="qa-row" onclick="toggleQA('q22')" data-topic="val">
+      <div class="qa-qnum">Q.22</div><div class="qa-qtext">Who gave the mandate to write this Whitepaper? <span class="qa-flag">🇩🇰</span></div>
+      <div class="qa-tags"><span class="qa-tag t-val">Mandate</span></div>
+    </div>
+    <div class="qa-panel" id="q22">No external mandate was given. The document stems from 25 years of Servas membership and individual moral responsibility — the same impulse that led Bob Luitweiler to cycle across Denmark in 1949 without waiting for permission. See Appendix F for the philosophical grounding of this approach.</div>
+    <div class="qa-row" onclick="toggleQA('q27')" data-topic="val">
+      <div class="qa-qnum">Q.27</div><div class="qa-qtext">Is the mention of Kant, Dostoyevsky, and Engels necessary? <span class="qa-flag">🇩🇰</span></div>
+      <div class="qa-tags"><span class="qa-tag t-val">Values</span></div>
+    </div>
+    <div class="qa-panel" id="q27">Main sections streamlined so philosophical references don't interrupt the operational argument. Full framework is in Appendix F. The references are retained because this is a values-based evolution, not merely a technical reform — they provide the ethical justification for why individuals, not just institutions, should have a voice.</div>
+  </div>
+
+  <div class="qa-block">
+    <div class="qa-block-title"><span class="qa-block-icon">🗳️</span>Democracy, governance &amp; power</div>
+    <div class="qa-row" onclick="toggleQA('q3')" data-topic="democracy">
+      <div class="qa-qnum">Q.3</div><div class="qa-qtext">How does individual membership improve democracy?</div>
+      <div class="qa-tags"><span class="qa-tag t-demo">Democracy</span></div>
+    </div>
+    <div class="qa-panel" id="q3">Currently all decision-making passes through a small number of Chapter delegates. Individual membership gives experienced members (5+ years) direct speaking, voting, and motion-submission rights — breaking the bottleneck of National Secretary gatekeeping. See Motion 2, 13.</div>
+    <div class="qa-row" onclick="toggleQA('q4')" data-topic="democracy">
+      <div class="qa-qnum">Q.4</div><div class="qa-qtext">Will National Secretaries lose their role or authority?</div>
+      <div class="qa-tags"><span class="qa-tag t-demo">Democracy</span></div>
+    </div>
+    <div class="qa-panel" id="q4">No. National Secretaries become "Spokespeople" with a broader coordination role. The reform reduces their monopoly on agenda-setting and motion submission (Motion 15), but their leadership function within chapters remains fully intact.</div>
+    <div class="qa-row" onclick="toggleQA('q8')" data-topic="democracy">
+      <div class="qa-qnum">Q.8</div><div class="qa-qtext">Is there a risk that individual members will dominate decision-making?</div>
+      <div class="qa-tags"><span class="qa-tag t-demo">Democracy</span></div>
+    </div>
+    <div class="qa-panel" id="q8">Unlikely in the short term given the 5-year eligibility requirement and target cap (55 Owls vs. 100+ chapters). Long-term balance is managed through the voting rights framework in Motions 9, 13, and 14 — one entity, one vote principle.</div>
+    <div class="qa-row" onclick="toggleQA('q15')" data-topic="democracy">
+      <div class="qa-qnum">Q.15</div><div class="qa-qtext">"Isn't direct or broader democracy risky and inefficient?"</div>
+      <div class="qa-tags"><span class="qa-tag t-demo">Democracy</span></div>
+    </div>
+    <div class="qa-panel" id="q15">Consultative voting (non-binding) and individual member voting (binding) are distinct. The former guides; the latter decides. The GA structure prevents any single group from dominating through the one-entity-one-vote principle applied to Legal Persons.</div>
+    <div class="qa-row" onclick="toggleQA('q16')" data-topic="democracy">
+      <div class="qa-qnum">Q.16</div><div class="qa-qtext">"Will large countries or individuals dominate smaller chapters?"</div>
+      <div class="qa-tags"><span class="qa-tag t-demo">Democracy</span></div>
+    </div>
+    <div class="qa-panel" id="q16">Each Chapter retains one vote regardless of size. Individual Members add voices but do not multiply votes per country. The model is designed to balance, not amplify, geographic power imbalances.</div>
+    <div class="qa-row" onclick="toggleQA('q29')" data-topic="democracy">
+      <div class="qa-qnum">Q.29</div><div class="qa-qtext">Will adding more member types really strengthen democracy in SI? <span class="qa-flag">🇩🇰</span></div>
+      <div class="qa-tags"><span class="qa-tag t-demo">Democracy</span></div>
+    </div>
+    <div class="qa-panel" id="q29">Yes — through four concrete mechanisms: (1) Direct individual representation for Owls (Motion 2, 13). (2) Inclusion of invisible regions via Roses (Motion 7). (3) Member-led motions (Motion 15). (4) Consultative voting for all 16,000+ Seekers (Motion 16). The GA becomes not just larger but qualitatively more representative.</div>
+  </div>
+
+  <div class="qa-block">
+    <div class="qa-block-title"><span class="qa-block-icon">💰</span>Finance &amp; sustainability</div>
+    <div class="qa-row" onclick="toggleQA('q7')" data-topic="finance">
+      <div class="qa-qnum">Q.7</div><div class="qa-qtext">How does the Hybrid Model affect Servas finances?</div>
+      <div class="qa-tags"><span class="qa-tag t-fin">Finance</span></div>
+    </div>
+    <div class="qa-panel" id="q7">Projects +55,555 CHF additional annual income from individual and social group memberships (KPI #3). Diversifies away from sole chapter-fee dependency — which the 2024 Audit Committee explicitly identified as a structural vulnerability that must be resolved.</div>
+    <div class="qa-row" onclick="toggleQA('q30')" data-topic="expert">
+      <div class="qa-qnum">Q.30</div><div class="qa-qtext">Response to Mei Wang (SI Exco Co-Peace Secretary): complexity, fees, paid staff, trainer readiness</div>
+      <div class="qa-tags"><span class="qa-tag t-expert">Expert Review</span><span class="qa-tag t-fin">Finance</span></div>
+    </div>
+    <div class="qa-panel" id="q30">Four-part response: (1) Complexity is real but unavoidable — raising chapter fees alone doesn't address structural stagnation and risks losing Global South chapters. (2) Doubling fees generates ~50-60K CHF but hits a structural ceiling — the membership base hasn't grown in 30 years. (3) Paid staff is her strongest point — the Hybrid Model's new revenue streams are designed to fund a paid Peace Builders Coordinator by Year 3. (4) Peace Schools and Peace Builders run in parallel; the program creates its own trainer pipeline from existing Peace School facilitators and AVP-certified trainers.</div>
+  </div>
+
+  <div class="qa-block">
+    <div class="qa-block-title"><span class="qa-block-icon">🌻</span>Social Groups (NGOs &amp; civil society)</div>
+    <div class="qa-row" onclick="toggleQA('q6')" data-topic="social">
+      <div class="qa-qnum">Q.6</div><div class="qa-qtext">What are SI Social Group Members, and why include them?</div>
+      <div class="qa-tags"><span class="qa-tag t-social">Social Groups</span></div>
+    </div>
+    <div class="qa-panel" id="q6">NGOs and civil society organisations aligned with Servas' peace mission. They bring fresh perspectives, a youth pipeline, and grant eligibility advantages. Each sends ONE delegate with full voting rights. The value proposition for Social Groups is detailed in Section II — a two-way relationship stated without embellishment.</div>
+    <div class="qa-row" onclick="toggleQA('q23')" data-topic="social">
+      <div class="qa-qnum">Q.23</div><div class="qa-qtext">Why should larger organisations be interested in SI Social Group Membership? <span class="qa-flag">🇩🇰</span></div>
+      <div class="qa-tags"><span class="qa-tag t-social">Social Groups</span></div>
+    </div>
+    <div class="qa-panel" id="q23">Six concrete benefits: (1) Access to 13,125+ hosts as pre-vetted volunteers — no recruitment cost. (2) UN consultative status channel for peace diplomacy. (3) Full GA governance voice — formal co-ownership of a 70-year iNGO. (4) Peace Builders curriculum co-design rights. (5) Institutional credibility for grant applications. (6) SDG alignment framework (SDG 5, 13, 16, 17) for impact reporting.</div>
+    <div class="qa-row" onclick="toggleQA('q24')" data-topic="social">
+      <div class="qa-qnum">Q.24</div><div class="qa-qtext">Will all members of a Social Group automatically become Servas members? <span class="qa-flag">🇩🇰</span></div>
+      <div class="qa-tags"><span class="qa-tag t-social">Social Groups</span></div>
+    </div>
+    <div class="qa-panel" id="q24"><strong>No.</strong> Institutional and individual membership are fully separate. When an NGO joins as a Social Group Member, this grants rights only to the organisation as a legal entity — specifically the right to appoint ONE delegate. Employees, volunteers, and individual members of that organisation do NOT become Servas members. They must apply individually through a Servas Branch. This is grounded in the Swiss Civil Code distinction between Natural and Legal Persons.</div>
+    <div class="qa-row" onclick="toggleQA('q26')" data-topic="social">
+      <div class="qa-qnum">Q.26</div><div class="qa-qtext">Can collective members water down the goals and vision of Servas? <span class="qa-flag">🇩🇰</span></div>
+      <div class="qa-tags"><span class="qa-tag t-social">Social Groups</span></div>
+    </div>
+    <div class="qa-panel" id="q26">Addressed through four structural safeguards: (1) Strict mission alignment — must work in peace, human rights, or environmental fields. (2) Single delegate rule — one vote regardless of organisation size. (3) SIGA/Exco vetting process for every application. (4) Annual review mechanism to adjust or pause admissions. The Whitepaper frames inclusion as adding new channels to a pond that is currently drying up — not diluting it.</div>
+    <div class="qa-row" onclick="toggleQA('q28')" data-topic="social">
+      <div class="qa-qnum">Q.28</div><div class="qa-qtext">Should Servas be careful about admitting organisations with religious backgrounds (e.g. AVP)? <span class="qa-flag">🇩🇰</span></div>
+      <div class="qa-tags"><span class="qa-tag t-social">Social Groups</span></div>
+    </div>
+    <div class="qa-panel" id="q28">Yes — and the Whitepaper is explicit: mission alignment, not doctrinal origin, is the criterion. AVP has Quaker historical roots but is explicitly non-denominational and secular. Its conflict transformation methodology (Transforming Power, Good Within Everyone) is validated through secular research in prisons, schools, and businesses. Servas should welcome people and organisations that support the Servas vision and mission, regardless of their origin.</div>
+  </div>
+
+  <div class="qa-block">
+    <div class="qa-block-title"><span class="qa-block-icon">🕊️</span>Peace Builders Program</div>
+    <div class="qa-row" onclick="toggleQA('q9')" data-topic="peace">
+      <div class="qa-qnum">Q.9</div><div class="qa-qtext">What is the Peace Builders program, and why is it central?</div>
+      <div class="qa-tags"><span class="qa-tag t-peace">Peace</span></div>
+    </div>
+    <div class="qa-panel" id="q9">A 100-hour hybrid curriculum (6–8 weeks) producing certified Peace Builder Educators (PBEs). Paris pilot in 2027, expanding to USA, India, Argentina, Kenya by 2033. Graduates train others during host/traveler stays — the multiplier model. It is the operational expression of Servas' peace mission and the reason the Hybrid Model's financial resilience matters.</div>
+    <div class="qa-row" onclick="toggleQA('q19')" data-topic="peace">
+      <div class="qa-qnum">Q.19</div><div class="qa-qtext">"Is the Peace Builders project too ambitious or idealistic?"</div>
+      <div class="qa-tags"><span class="qa-tag t-peace">Peace</span></div>
+    </div>
+    <div class="qa-panel" id="q19">Addressed with budget figures (36,000 CHF/3 years), Rotary's Rotaract precedent (1.4M members after similar reform), and the home-schooling multiplier model that allows scaling without large central budgets. Peace Schools and Peace Builders run in parallel to build the trainer pipeline progressively.</div>
+    <div class="qa-row" onclick="toggleQA('q25')" data-topic="peace">
+      <div class="qa-qnum">Q.25</div><div class="qa-qtext">What is being done about the critically low number of young members? <span class="qa-flag">🇩🇰</span></div>
+      <div class="qa-tags"><span class="qa-tag t-peace">Peace</span></div>
+    </div>
+    <div class="qa-panel" id="q25">Five-layer strategy: (1) University Campus Project — ambassadors, Peace Clubs, SYLE program. (2) Academic/career incentives — university credits, UN certificates, Cultural Competency Portfolios as CVs. (3) Digital identity overhaul — TikTok/Reels storytelling, gamification with digital badges. (4) Peace Builders Program — 100-hour curriculum with UNESCO accreditation target. (5) Participatory governance — direct voting for Individual Members, consultative voting for all Seekers. Target: 18–40 cohort from 15% to 20%.</div>
+  </div>
+
+  <div class="qa-block">
+    <div class="qa-block-title"><span class="qa-block-icon">🌳</span>Chapters, structure &amp; transition</div>
+    <div class="qa-row" onclick="toggleQA('q2')" data-topic="structure">
+      <div class="qa-qnum">Q.2</div><div class="qa-qtext">Does this model replace SI Chapters?</div>
+      <div class="qa-tags"><span class="qa-tag t-struct">Structure</span></div>
+    </div>
+    <div class="qa-panel" id="q2">No. Chapters remain the backbone of Servas. The Hybrid Model adds new paths alongside chapters — it does not remove, replace, or diminish the Oak structure. Chapters retain full voting rights and their central role in the community.</div>
+    <div class="qa-row" onclick="toggleQA('q5')" data-topic="structure">
+      <div class="qa-qnum">Q.5</div><div class="qa-qtext">How are groups without legal status affected?</div>
+      <div class="qa-tags"><span class="qa-tag t-struct">Structure</span></div>
+    </div>
+    <div class="qa-panel" id="q5">Groups that cannot register as Legal Persons (political or legal constraints) are not excluded — they transition to SI Group status and can appoint an SI Representative (Rose, Motion 7) with full GA voting and motion rights. No group is left voiceless under the Hybrid Model.</div>
+    <div class="qa-row" onclick="toggleQA('q10')" data-topic="structure">
+      <div class="qa-qnum">Q.10</div><div class="qa-qtext">How will this transition be managed?</div>
+      <div class="qa-tags"><span class="qa-tag t-struct">Structure</span></div>
+    </div>
+    <div class="qa-panel" id="q10">Phased implementation with annual review points. Early years focus on learning, not rapid growth. The Innovation Project Team (appointed by SI Exco following Motion 18) leads implementation. 12 KPIs with named owners (IPT) track progress. It is a living roadmap, not a fixed prescription.</div>
+    <div class="qa-row" onclick="toggleQA('q12')" data-topic="structure">
+      <div class="qa-qnum">Q.12</div><div class="qa-qtext">What decision are delegates being asked to make?</div>
+      <div class="qa-tags"><span class="qa-tag t-struct">Structure</span></div>
+    </div>
+    <div class="qa-panel" id="q12">Not to approve a finished system — to authorise a conscious process of renewal. Pass 18 motions that create the legal and structural framework, then entrust implementation to the Innovation Project Team with annual oversight by SI Exco. The roadmap can be adjusted, corrected, or paused at any annual review point.</div>
+    <div class="qa-row" onclick="toggleQA('q13')" data-topic="structure">
+      <div class="qa-qnum">Q.13</div><div class="qa-qtext">How will the Hybrid Model be reviewed?</div>
+      <div class="qa-tags"><span class="qa-tag t-struct">Structure</span></div>
+    </div>
+    <div class="qa-panel" id="q13">Annual evaluation points built into the roadmap. SI Exco and the Innovation Project Team can adjust, correct, or pause elements that do not serve the community. The Risk-Mitigation Matrix (Section IV) identifies 10 risks with specific response strategies. See Section V for KPIs and owners.</div>
+    <div class="qa-row" onclick="toggleQA('q17')" data-topic="structure">
+      <div class="qa-qnum">Q.17</div><div class="qa-qtext">"Isn't the model too complex to implement?"</div>
+      <div class="qa-tags"><span class="qa-tag t-struct">Structure</span></div>
+    </div>
+    <div class="qa-panel" id="q17">Complexity is acknowledged honestly. Managed through phased rollout, annual reviews, clear KPIs with named owners, and the Innovation Project Team. The alternative — structural status quo — carries its own compounding risk: decline that becomes progressively harder to reverse.</div>
+    <div class="qa-row" onclick="toggleQA('q18')" data-topic="structure">
+      <div class="qa-qnum">Q.18</div><div class="qa-qtext">"What if the Hybrid Model does not work as expected?"</div>
+      <div class="qa-tags"><span class="qa-tag t-struct">Structure</span></div>
+    </div>
+    <div class="qa-panel" id="q18">The Risk-Mitigation Matrix (Section IV) addresses 10 identified risks with specific response strategies. Annual review authority allows adjustment. The model is explicitly designed to be corrected at regular intervals — not just launched and left to run.</div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PAGE 7: OPINIONS -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="page" id="page-opinions">
+<div class="container">
+  <div class="sec-eyebrow">Review &amp; Feedback Process</div>
+  <div class="sec-title">Voices from the Community 💬</div>
+  <div class="sec-lead">Version 3.3 has been reviewed and discussed by SI leadership, former Exco members, National Secretaries, and long-time Servas advocates across six countries. The consultation process ran from November 2025 to April 2026.</div>
+
+  <div class="opinion-grid">
+    <div class="opinion-card">
+      <div class="opinion-quote">I was in the room only one person, with Ömer from Turkey. And it was a great conversation because he has thought a lot about improving Servas, about the future of Servas. And he has a lot of ideas, very good ideas that align also with my ideas... Something great will come up.</div>
+      <div class="opinion-person">Carla Kristensen</div>
+      <div class="opinion-role">Servas International Vice President · Servas Peace Forum, Dec 2025</div>
+    </div>
+    <div class="opinion-card">
+      <div class="opinion-quote">Very smart way of presenting the words with a lot of drawings, because they go directly into the feelings. So that's very important. The first time I went through the white paper, I concentrated only on the drawings and skimmed very quickly.</div>
+      <div class="opinion-person">Sonja Salminen</div>
+      <div class="opinion-role">Servas Denmark Board Member · Presented at Denmark GA, April 2026 🇩🇰</div>
+    </div>
+    <div class="opinion-card">
+      <div class="opinion-quote">So good to help put peace activism back in Servas International... I will suggest to develop Servas Peace Schools more and then start the 2nd projects, peace builders.</div>
+      <div class="opinion-person">Mary Jane Mikuriya</div>
+      <div class="opinion-role">Former President Servas USA · Former SI Exco VP · Friend of Bob Luitweiler · April 2026</div>
+    </div>
+    <div class="opinion-card">
+      <div class="opinion-quote">It makes me think that maybe there's some other things which are actually staring us in the face... any institution, whatever it may be — it's like the oil tank, you know, that says you have to start putting on the brakes 6 miles from the port... you start to manoeuvre it.</div>
+      <div class="opinion-person">Jamie Robertson</div>
+      <div class="opinion-role">SI Development Fund Committee Convenor · April 2026</div>
+    </div>
+    <div class="opinion-card">
+      <div class="opinion-quote">The purpose is to strengthen democratic legitimacy, broaden participation, and create a more resilient and transparent financial foundation. I feel it's complicated and adds administrative work... I think the priority of the increasing income should be used at hiring one or several young staff to work for Servas.</div>
+      <div class="opinion-person">Mei Wang</div>
+      <div class="opinion-role">SI Exco Co-Peace Secretary · Servas Taiwan · January 2026</div>
+    </div>
+    <div class="opinion-card" style="border:1px solid var(--green-border)">
+      <div class="opinion-quote" style="font-style:normal;font-size:13px">
+        <strong style="color:var(--green)">Q.30 — Full Response to Mei Wang's Critique</strong><br><br>
+        The Whitepaper acknowledges all four concerns directly: (1) Complexity is real but unavoidable — and fee-raising alone hits a structural ceiling after 30 years of stagnation. (2) Doubling chapter fees generates ~50-60K CHF but doesn't diversify the risk. (3) <strong>Paid staff is her strongest point</strong> — new revenue streams are designed to fund a paid coordinator by Year 3. (4) Peace Schools and Peace Builders run in parallel, creating the trainer pipeline from day one.
+      </div>
+      <div class="opinion-person" style="color:var(--green)">Whitepaper Response · Q&amp;A #30</div>
+      <div class="opinion-role">See full response in Appendix B</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;margin:28px 0 14px">Review Timeline</h3>
+  <table class="proj-table">
+    <thead><tr><th>Date</th><th>Reviewer / Event</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td>Nov 26, 2025</td><td>Arnoud Philippo de Jong</td><td>Former SI Exco Member, Former NS Servas Netherlands</td></tr>
+      <tr><td>Nov 30, 2025</td><td>Alexey Tereshchenko</td><td>Former Servas Russia NS</td></tr>
+      <tr><td>Dec 15, 2025</td><td>Carla Kristensen</td><td>SI Exco Vice President</td></tr>
+      <tr><td>Jan 23, 2026</td><td>Mei Wang</td><td>SI Exco Co-Peace Secretary</td></tr>
+      <tr><td>Jan 27, 2026</td><td>Monique Cornellissen</td><td>Servas Netherlands NS</td></tr>
+      <tr><td>Feb 1, 2026</td><td>Arne Schäffler</td><td>Servas Germany NS</td></tr>
+      <tr><td>Mar 19, 2026</td><td>Radha Radhakrishna</td><td>SI President — online meeting</td></tr>
+      <tr><td>Mar 28, 2026</td><td>SI Exco</td><td>Online presentation</td></tr>
+      <tr><td>Apr 8, 2026</td><td>Sonja Salminen</td><td>Servas Denmark Board Member</td></tr>
+      <tr><td>Apr 11, 2026</td><td>Mary Jane Mikuriya</td><td>Former SI Exco VP, Servas USA Board</td></tr>
+      <tr><td>Apr 12, 2026</td><td>Servas Denmark GA 🇩🇰</td><td>Presentation by Sonja Salminen</td></tr>
+      <tr><td>Apr 16, 2026</td><td>Jamie Robertson</td><td>SI Development Fund Committee Convenor</td></tr>
+      <tr><td>Apr 18, 2026</td><td>Servas Spain GA 🇪🇸</td><td>Presentation by Arnoud Philippo</td></tr>
+    </tbody>
+  </table>
+
+  <div class="infobox ib-gold" style="margin-top:24px">
+    <strong>Full document (v3.3):</strong> <a href="https://drive.google.com/file/d/1cuqsqX8-_ZbpKkHTBGCHZr2MPhXn1gSV/view?usp=sharing" target="_blank" style="color:var(--gold)">Google Drive PDF ↗</a> &nbsp;|&nbsp;
+    <strong>Executive Summary EN:</strong> <a href="https://drive.google.com/file/d/17BZEmnFbZJgfsPlH-693UkZzWAx4AQjI/view?usp=sharing" target="_blank" style="color:var(--gold)">Drive ↗</a> &nbsp;|&nbsp;
+    <strong>Executive Summary ES:</strong> <a href="https://drive.google.com/file/d/1RLAA3hW0fAOVoHV1OS40QbJOyp0Z98my/view?usp=sharing" target="_blank" style="color:var(--gold)">Drive ↗</a> &nbsp;|&nbsp;
+    <strong>Servas Agora:</strong> <a href="https://forms.gle/ipzDBB6p3kszCfqh7" target="_blank" style="color:var(--gold)">Register ↗</a>
+  </div>
+</div>
+</div>
+
+<button class="print-fab" onclick="window.print()">Print / PDF</button>
+<button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  const btns = document.querySelectorAll('.nav-btn');
+  const map = {crisis:0,model:1,motions:2,kpi:3,agora:4,qa:5,opinions:6};
+  if (map[name] !== undefined) btns[map[name]].classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function toggleMotion(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+
+function toggleQA(id) {
+  const panel = document.getElementById(id);
+  panel.classList.toggle('open');
+}
+
+function filterTopic(topic) {
+  document.querySelectorAll('.topic-pill').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.qa-row').forEach(row => {
+    if (topic === 'all' || row.dataset.topic === topic) {
+      row.style.display = '';
+    } else {
+      row.style.display = 'none';
+      const id = row.getAttribute('onclick').match(/'([^']+)'/)[1];
+      const panel = document.getElementById(id);
+      if (panel) panel.classList.remove('open');
+    }
+  });
+}
+</script>
+</body>
+</html>
